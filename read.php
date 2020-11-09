@@ -34,5 +34,28 @@
             </ul>
         </div>
     </div>
+
+    <div class="reply_view">
+        <h3>댓글목록</h3>
+        <?php
+            $sql3 = mq("select * from board_comment post_idx='".$bno."' order by bc_comment_time desc");
+            while($reply = $sql3->fetch_array()) {
+        ?>
+        <div class="dap_lo">
+            <div><b><?php echo $reply['name']; ?></b></div>
+            <div class="dap_to comt_edit"><?php echo nl2br("$reply[content]"); ?></div>
+            <div class="rep_me dap_to"><?php echo $reply['data']; ?></div>
+            <div class="rep_me rep_menu">
+                <a class="dat_edit_bt" href="#">수정</a>
+                <a class="dat_delete_bt" href="#">삭제</a>
+            </div>
+        </div>
+        <div class="dat_edit">
+            <form action="rep_modify_ok.php" method="post">
+                <input type="hidden" name="rno" value="<?php echo $reply['mem_idx']; ?>" /> <input type="hidden" name="b_no" value="<?php echo $bno; ?>">
+                <textarea name="content" class="dap_edit_t"></textarea>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
