@@ -13,7 +13,7 @@
         $hit = mysqli_fetch_array(mq("select * from board_post where idx ='".$bno."'"));
         $hit = $hit['bp_hit'] + 1;
         $fet = mq("update board_post set bp_hit = '".$hit."' where idx = '".$bno."'");
-        $sql = mq("select * from board_post where idx='".$bno."'");asdasdasd
+        $sql = mq("select * from board_post where idx='".$bno."'");
         $board = $sql->fetch_array();
     ?>
 
@@ -23,7 +23,7 @@
             <?php echo $board['mem_idx']; ?> <?php echo $board['bp_create_time']; ?> 조회: <?php echo $board['bp_hit']; ?>
             <div id="bo_line"></div>
         </div>
-        <div id="bo_content">asdasdasd
+        <div id="bo_content">
             <?php echo nl2br("$board[bp_contents]"); ?>
         </div>
         <div id="bo_ser">
