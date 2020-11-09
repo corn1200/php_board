@@ -13,7 +13,13 @@
 </head>
 <body>
     <div id="board_write">
-        <h1><a href=""></a></h1>
+        <h1><a href="/">자유게시판</a></h1>
+        <h4>글을 수정합니다.</h4>
+        <div id="write_area">
+            <form action="modify_ok.php?idx=<?php echo $bno; ?>" method="post">
+        
+        </form>
+        </div>
     </div>
 </body>
 </html>
