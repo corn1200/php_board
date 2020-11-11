@@ -1,5 +1,6 @@
 <?php
-    session_start();
+    include '../model/member.php';
+
     if(isset($_SESSION['id'])) {
         $isLogin = TRUE;
     }

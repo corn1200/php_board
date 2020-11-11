@@ -14,6 +14,11 @@
         }
     }
 
+    function isLoginDataValid($id, $pw) {
+        $getId = confirmId($id);
+        $getPw = DBQuery();
+    }
+
     if($postIdData != NULL) {
         if(confirmOverlapId($postIdData)) {
             echo "ID already exists.";
