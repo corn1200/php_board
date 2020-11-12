@@ -19,6 +19,13 @@
         $getPw = DBQuery();
     }
 
+    function notInvalidAccess($alert) {
+        return "<script>
+                    alert('$alert');
+                    history.back();
+                </script>";
+    }
+
     if($postIdData != NULL) {
         if(confirmOverlapId($postIdData)) {
             echo "ID already exists.";

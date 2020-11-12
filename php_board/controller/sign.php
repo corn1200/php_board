@@ -15,9 +15,6 @@
         $sql = DBQuery("insert into board_member(bm_id, bm_password, bm_name, bm_address, bm_address_num, bm_address_detail, bm_create_time) values('".$bm_id."', '".$bm_password."', '".$bm_name."', '".$bm_address."', '".$bm_address_num."', '".$bm_address_detail."', '".$bm_create_time."')");
         header('Location: ../index.php');
     } else {
-        echo "<script>
-                alert('ID already exists.');
-                history.back();
-              </script>";
+        echo notInvalidAccess('ID already exists.');
     }
 ?>
