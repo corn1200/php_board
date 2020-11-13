@@ -15,10 +15,11 @@
     <form action="../controller/sign.php" method="post">
         <input type="text" name="id" placeholder="* ID" id="id" required>
         <input type="password" name="password" placeholder="* PASSWORD" id="password" required>
+        <input type="password" name="retypepw" placeholder="* Retype PASSWORD" id="retypepw" required>
         <input type="text" name="name" placeholder="* NAME" id="name" required>
         <input type="button" value="SEARCH ADDRESS" id="searchaddress" onclick="searchAddress()"></input>
-        <input type="text" name="address" placeholder="ADDRESS" id="address">
         <input type="text" name="post_code" placeholder="POST CODE" id="post_code">
+        <input type="text" name="address" placeholder="ADDRESS" id="address">
         <input type="text" name="detail_address" placeholder="DETAIL ADDRESS" id="detail_address">
         <input type="submit" value="SIGN" disabled="" id="submit">
         <div>

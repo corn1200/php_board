@@ -7,7 +7,7 @@ $(document).ready(function(e) {
             userid = self.val();
         }
 
-        $.post("../controller/member_check.php", { userid: userid }, function(data) {
+        $.post("../controller/sign_checker.php", { userid: userid }, function(data) {
             self.parent().parent().find("#id_check").html(data);
             if(data == "ID already exists.") {
                 self.parent().parent().find("#id_check").css("color", "#F00");

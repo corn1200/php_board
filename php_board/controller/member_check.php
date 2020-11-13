@@ -15,24 +15,27 @@
     }
 
     function isLoginDataValid($id, $pw) {
-        $getId = confirmId($id);
-        $getPw = DBQuery();
+        $getMember = confirmLoginData($id, $pw);
+        $getMember = $getMember->fetch();
+
+        if($getMember >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function alertMesseage($alert, $href) {
+        return "<script>
+            alert('$alert');
+            location.href='$href';
+        </script>";
     }
 
     function notInvalidAccess($alert) {
         return "<script>
-                    alert('$alert');
-                    history.back();
-                </script>";
-    }
-
-    if($postIdData != NULL) {
-        if(confirmOverlapId($postIdData)) {
-            echo "ID already exists.";
-        } else {
-            echo "Your ID is valid.";
-        }
-    } else {
-        echo "Please Type Your ID.";
+            alert('$alert');
+            history.back();
+        </script>";
     }
 ?>

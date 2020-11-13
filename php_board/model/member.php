@@ -6,8 +6,8 @@
         return $queryResult;
     }
 
-    function confirmPassword($id) {
-        $queryResult = DBQuery("select bm_password from board_member where bm_id='{$id}'");
+    function confirmLoginData($id, $pw) {
+        $queryResult = DBQuery("select * from board_member where bm_id='{$id}' AND bm_password='{$pw}'");
         return $queryResult;
     }
 ?>

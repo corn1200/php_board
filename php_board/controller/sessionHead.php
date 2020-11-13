@@ -1,11 +1,15 @@
 <?php
-    include '../model/member.php';
+    session_start();
 
-    if(isset($_SESSION['id'])) {
+    $isLogin = false;
+
+    if(isset($_SESSION['id']) || isset($_COOKIE['cookieID'])) {
         $isLogin = TRUE;
     }
 
     if(!$isLogin) {
         header ('Location: ../view/loginpage.php');
+    } else {
+        header ('Location: ../view/mainpage.php');
     }
 ?>
