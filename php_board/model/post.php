@@ -33,7 +33,7 @@
     function somebodyHitPost($idx) {
         $searchHitQuery = searchPostByIDX($idx);
         $findHit = $searchHitQuery->fetch();
-        $findHit = $findHit['hit'] + 1;
+        $findHit = $findHit['bp_hit'] + 1;
         $queryResult = DBQuery("update board_post set bp_hit = '{$findHit}' where idx = '{$idx}'");
         return $queryResult;
     }
