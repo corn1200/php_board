@@ -38,4 +38,9 @@
             history.back();
         </script>";
     }
+
+    function loginTimeCheck($id) {
+        $bm_login_time = strtotime("now");
+        return DBQuery("update board_member set bm_login_time = '{$bm_login_time}' where bm_id = '{$id}'");
+    }
 ?>

@@ -3,8 +3,11 @@
 
     include '../controller/member_check.php';
 
-    if(isset($_SESSION['id']) || isset($_COOKIE['cookieID'])) {
+    if(isset($_SESSION['id'])) {
         $logId = $_SESSION['id'];
+        echo alertMesseage('You are Already Logged in '.$logId, '/view/mainpage.php');
+    } elseif(isset($_COOKIE['cookieID'])) {
+        $logId = $_COOKIE['cookieID'];
         echo alertMesseage('You are Already Logged in '.$logId, '/view/mainpage.php');
     }
 ?>

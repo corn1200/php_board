@@ -7,9 +7,11 @@
         $isLogin = TRUE;
     }
 
-    if(!$isLogin) {
-        header ('Location: ../view/loginpage.php');
-    } else {
-        header ('Location: ../view/mainpage.php');
+    function indexPage($isLogin) {
+        if(!$isLogin) {
+            return header('Location: ../view/loginpage.php');
+        } else {
+            return header('Location: ../view/mainpage.php');
+        }
     }
 ?>
