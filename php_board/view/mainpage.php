@@ -20,32 +20,29 @@
     <title>MainPage</title>
 </head>
 <body>
-    Logged at <a href=""><?php echo $_SESSION['id']; ?></a> .
-    <div>
-        <a href="../controller/logout.php"><button>Logout</button></a>
-    </div>
+    <?php echo showMember(); ?>
     <div id="board_area">
         <h1>Free Board</h1>
         <h4>You can write freely!</h4>
+        <div id="write_btn">
+            <a href="./writepage.php"><button>Writing</button></a>
+        </div>
         <table class="list-table">
             <thead>
                 <tr>
                     <th width="70">No.</th>
                     <th width="500">Title</th>
                     <th width="120">Writer</th>
-                    <th width="110">Date Created</th>
+                    <th width="150">Date Created</th>
                     <th width="100">Hit</th>
                 </tr>
             </thead>
             <?php
                 include '../model/post.php';
 
-                echo readPostList();
+                echo readPostList(0,50);
             ?>
         </table>
-        <div id="write_btn">
-            <a href="./writepage.php"><button>Writing</button></a>
-        </div>
     </div>
 </body>
 </html>

@@ -7,5 +7,5 @@
     session_unset();
     session_destroy();
     
-    echo alertMesseage('Logout success', '/view/loginpage.php');
+    echo alertMesseage('Logout success.', '/view/loginpage.php');
 ?>

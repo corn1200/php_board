@@ -15,7 +15,7 @@
             setcookie('cookieID', $cookieID, time()+604800, "/");
         }
         loginTimeCheck($id);
-        echo alertMesseage('Login success', '/view/mainpage.php');
+        echo alertMesseage('Login success.', '/view/mainpage.php');
     } else {
         echo notInvalidAccess('Can not Login.');
     }

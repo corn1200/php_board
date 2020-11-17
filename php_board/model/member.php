@@ -15,4 +15,13 @@
         $queryResult = DBQuery("select * from board_member where idx='{$idx}'");
         return $queryResult;
     }
+
+    function showMember() {
+        ?>
+        Logged at <a href=""><?php echo $_SESSION['id']; ?></a> .
+        <div>
+            <a href="../controller/logout.php"><button>Logout</button></a>
+        </div>
+        <?php
+    }
 ?>

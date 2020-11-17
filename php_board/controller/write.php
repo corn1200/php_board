@@ -1,10 +1,10 @@
 <?php
     session_start();
+    
     include './member_check.php';
     
     $bp_title = $_POST['title'];
     $bp_contents = $_POST['content'];
-    $mem_idx = null;
     $idx = confirmId($_SESSION['id'] ? $_SESSION['id'] : $_COOKIE['cookieID']);
     $idxResult = $idx->fetch();
     $mem_idx = $idxResult["idx"];

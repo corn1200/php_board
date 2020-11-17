@@ -10,7 +10,7 @@
     <title>SignPage</title>
 </head>
 <body>
-    <button onclick="history.back()">Back</button>
+    <button><a href="../">Back</a></button>
     <h1>SIGN</h1>
     <form action="../controller/sign.php" method="post">
         <input type="text" name="id" placeholder="* ID" id="id" required>
