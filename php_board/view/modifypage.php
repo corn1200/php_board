@@ -21,7 +21,7 @@
         $postDataQuery = searchPostByIDX($_GET['idx']);
         $findPost = $postDataQuery->fetch();
     ?>
-    <button><a href="../">Back</a></button>
+    <button onclick="history.back()">Back</button>
     <div id="board_write">
         <h1><a href="/">Free Board</a></h1>
         <h4>space for modifing.</h4>

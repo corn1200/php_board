@@ -40,9 +40,24 @@
             <?php
                 include '../model/post.php';
 
-                echo readPostList(0,50);
+                $page = getPageNum($_GET['page']);
+                $row_num = getAllPost()->rowCount();
+                $list = 30;
+                $block_ct = 5;
+                $block = calcBlockData($page, $block_ct);
+                $total = calcPageData($row_num, $list, $block, $page, $block_ct);
+                $start_num = ($page-1) * $list;
+                
+                echo readPostList($start_num,$list);
             ?>
         </table>
+        <div id="page_num">
+            <ul>
+                <?php
+                    echo showPagingView($page, $block, $total);
+                ?>
+            </ul>
+        </div>
     </div>
 </body>
 </html>

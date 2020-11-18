@@ -1,5 +1,10 @@
 <?php
     include_once '../db.php';
+
+    function getAllPost() {
+        $queryResult = DBQuery("select * from board_post");
+        return $queryResult;
+    }
     
     function isPostIdxValid($idx) {
         $postQuery = searchPostByIDX($idx);
@@ -72,6 +77,64 @@
                 <li><a href="../view/modifypage.php?idx=<?php echo $postIdx; ?>">[Modify]</a></li>
                 <li><a href="../controller/delete.php?idx=<?php echo $postIdx; ?>">[Delete]</a></li>
             <?php
+        }
+    }
+
+    function getPageNum($page) {
+        if(isset($page)) {
+            return $page;
+        } else {
+            return 1;
+        }
+    }
+
+    function calcBlockData($page, $block_ct) {
+        $block['num'] = ceil($page/$block_ct);
+        $block['start'] = (($block['num'] - 1) * $block_ct) + 1;
+        $block['end'] = $block['start'] + $block_ct - 1;
+        return $block;
+    }
+
+    function calcPageData($row_num, $list, $block, $page, $block_ct) {
+        $total['page'] = ceil($row_num/$list);
+        if($block['end'] > $total['page']) $block['end'] = $total['page'];
+        $total['block'] = ceil($total['page']/$block_ct);
+        return $total;
+    }
+
+    function showPagingView($page, $block, $total) {
+        if($page >= 1) {
+            echo "<li class='fo_re'>First</li>";
+        } else {
+            echo "<li><a href='?page=1'>First</a></li>";
+        }
+        
+        if($page <= 1) {
+
+        } else {
+            $pre = $page - 1;
+            echo "<li><a href='?page=$pre'>Previous</a></li>";
+        }
+
+        for($i = $block['start']; $i <= $block['end']; $i++) {
+            if($page == $i) {
+                echo "<li class='fo_re'>[$i]</li>";
+            } else {
+                echo "<li><a href='?page=$i'>[$i]</a></li>";
+            }
+        }
+
+        if($block['num'] >= $total['block']) {
+
+        } else {
+            $next = $page + 1;
+            echo "<li><a href='?page=$next'>Next</a></li>";
+        }
+
+        if($page >= $total['page']) {
+            echo "<li class='fo_re'>Last</li>";
+        } else {
+            echo "<li><a href='?page=$total[page]'>Last</a></li>";
         }
     }
 ?>
