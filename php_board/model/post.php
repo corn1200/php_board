@@ -1,13 +1,8 @@
 <?php
     include_once '../db.php';
     
-    function confirmPost($idx) {
-        $queryResult = DBQuery("select * from board_post where idx='{$idx}'");
-        return $queryResult;
-    }
-
     function isPostIdxValid($idx) {
-        $postQuery = confirmPost($idx);
+        $postQuery = searchPostByIDX($idx);
         $postQuery = $postQuery->fetch();
 
         if($postQuery >= 1) {
@@ -31,7 +26,7 @@
         <tbody>
             <tr>
                 <td width="70"><?php echo $postList['idx'] ?></td>
-                <td width="500"><a href="/view/readpage.php?idx=<?php echo $postList['idx']; ?>"><?php echo $title ?></a></td>
+                <td width="500"><a href="/view/readpage.php?idx=<?php echo $postList['idx']; ?>"><?php echo $title."[".$postList['bp_comment_count']."]" ?></a></td>
                 <td width="120"><a href=""><?php echo $findName['bm_name'] ?></a></td>
                 <td width="150"><?php echo $writetime ?></td>
                 <td width="100"><?php echo $postList['bp_hit'] ?></td>

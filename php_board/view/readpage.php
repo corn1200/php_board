@@ -5,10 +5,12 @@
     include '../controller/readcomment.php';
 ?>
 <!doctype html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>ReadPage</title>
     <link rel="stylesheet" type="text/css" href="../css/readpage.css" />
+    <script type="text/javascript" src="../js/modifyDialog.js"></script>
 </head>
 
 <body>
@@ -55,9 +57,6 @@
     <div class="reply_view">
         <h3>Comments</h3>
     </div>
-    <?php
-        echo readCommentList($idxOfPost,0,10);
-    ?>
     <div class="dap_ins">
         <form action="../controller/comment_write.php?idx=<?php echo $idxOfPost; ?>" method="post">
             <div style="margin-top:10px; ">
@@ -66,6 +65,9 @@
 			</div>
 		</form>
 	</div>
+    <?php
+        echo readCommentList($idxOfPost,0,10);
+    ?>
     </div>
         <div id="foot_box"></div>
     </div>

@@ -9,6 +9,7 @@
 
     if($isMinePost) {
         $sql = DBQuery("delete from board_post where idx=$postIdx");
+        DBQuery("delete from board_comment where post_idx=$postIdx");
         echo alertMesseage('Delete Success.', '/');
     } else {
         echo notInvalidAccess('You can not Delete this Post.');
