@@ -1,9 +1,19 @@
 <?php
     include_once '../db.php';
 
-    function getAllPost() {
-        $queryResult = DBQuery("select * from board_post");
-        return $queryResult;
+    function getPost($category, $search) {
+        if(isset($category) && isset($search)) {
+            if($category == "bm_name") {
+                $queryResult = DBQuery("select * from board_member where bm_name like '%$search%'");
+                return $queryResult;
+            } else {
+                $queryResult = DBQuery("select * from board_post where $category like '%$search%'");
+                return $queryResult;
+            }
+        } else {
+            $queryResult = DBQuery("select * from board_post");
+            return $queryResult;
+        }
     }
     
     function isPostIdxValid($idx) {
@@ -17,8 +27,23 @@
         }
     }
 
-    function readPostList($startLimit,$limit) {
+    function readPostList($startLimit,$limit,$category,$search) {
         $queryResult = DBQuery("select * from board_post order by idx desc limit $startLimit,$limit");
+
+        if(isset($category) && isset($search)) {
+            if($category == "bm_name") {
+                $queryResult = DBQuery("select * from board_post where mem_idx in (select idx from board_member where bm_name like '%$search%') order by idx desc limit '{$startLimit}','{$limit}'");
+            } else {
+                $queryResult = DBQuery("select * from board_post where $category like '%$search%' order by idx desc limit $startLimit,$limit");
+                $rowCount = $queryResult->rowCount();
+                if($rowCount < 1) {
+                    ?>
+                    <h1 style="margin-top: 100px; text-align: center;">Theres No Result</h1>
+                    <?php
+                    return;
+                }
+            }
+        }
         while($postList = $queryResult->fetch()) {
             $searchNameQuery = DBQuery("select * from board_member where idx = '{$postList['mem_idx']}'");
             $findName = $searchNameQuery->fetch();
@@ -31,7 +56,7 @@
         <tbody>
             <tr>
                 <td width="70"><?php echo $postList['idx'] ?></td>
-                <td width="500"><a href="/view/readpage.php?idx=<?php echo $postList['idx']; ?>"><?php echo $title."[".$postList['bp_comment_count']."]" ?></a></td>
+                <td width="500"><a href="/view/readpage.php?idx=<?php echo $postList['idx']; ?>"><?php echo $title; if($postList['bp_comment_count'] >= 1) echo "[".$postList['bp_comment_count']."]" ?></a></td>
                 <td width="120"><a href=""><?php echo $findName['bm_name'] ?></a></td>
                 <td width="150"><?php echo $writetime ?></td>
                 <td width="100"><?php echo $postList['bp_hit'] ?></td>
@@ -88,6 +113,14 @@
         }
     }
 
+    function getListNum($list) {
+        if(isset($list)) {
+            return $list;
+        } else {
+            return 10;
+        }
+    }
+
     function calcBlockData($page, $block_ct) {
         $block['num'] = ceil($page/$block_ct);
         $block['start'] = (($block['num'] - 1) * $block_ct) + 1;
@@ -95,46 +128,85 @@
         return $block;
     }
 
-    function calcPageData($row_num, $list, $block, $page, $block_ct) {
+    function calcPageData($row_num, $list, $block_ct) {
         $total['page'] = ceil($row_num/$list);
-        if($block['end'] > $total['page']) $block['end'] = $total['page'];
         $total['block'] = ceil($total['page']/$block_ct);
         return $total;
     }
 
-    function showPagingView($page, $block, $total) {
-        if($page >= 1) {
+    function showPagingView($page, $block, $total, $list, $category, $search) {
+        if($page <= 1) {
             echo "<li class='fo_re'>First</li>";
         } else {
-            echo "<li><a href='?page=1'>First</a></li>";
+            if(isset($category) && isset($search)) {
+                echo "<li><a href='?page=1&list=$list&category=$category&search=$search'>First</a></li>";
+            } else {
+                echo "<li><a href='?page=1&list=$list'>First</a></li>";
+            }
         }
         
         if($page <= 1) {
 
         } else {
             $pre = $page - 1;
-            echo "<li><a href='?page=$pre'>Previous</a></li>";
+            if(isset($category) && isset($search)) {
+                echo "<li><a href='?page=$pre&list=$list&category=$category&search=$search'>Prev</a></li>";
+            } else {
+                echo "<li><a href='?page=$pre&list=$list'>Prev</a></li>";
+            }
+            
         }
 
         for($i = $block['start']; $i <= $block['end']; $i++) {
             if($page == $i) {
                 echo "<li class='fo_re'>[$i]</li>";
             } else {
-                echo "<li><a href='?page=$i'>[$i]</a></li>";
+                if(isset($category) && isset($search)) {
+                    echo "<li><a href='?page=$i&list=$list&category=$category&search=$search'>[$i]</a></li>";
+                } else {
+                    echo "<li><a href='?page=$i&list=$list'>[$i]</a></li>";
+                }
+                
             }
         }
 
-        if($block['num'] >= $total['block']) {
+        if($page >= $total['page']) {
 
         } else {
             $next = $page + 1;
-            echo "<li><a href='?page=$next'>Next</a></li>";
+            if(isset($category) && isset($search)) {
+                echo "<li><a href='?page=$next&list=$list&category=$category&search=$search'>Next</a></li>";
+            } else {
+                echo "<li><a href='?page=$next&list=$list'>Next</a></li>";
+            }
+            
         }
 
         if($page >= $total['page']) {
             echo "<li class='fo_re'>Last</li>";
         } else {
-            echo "<li><a href='?page=$total[page]'>Last</a></li>";
+            if(isset($category) && isset($search)) {
+                echo "<li><a href='?page=$total[page]&list=$list&category=$category&search=$search'>Last</a></li>";
+            } else {
+                echo "<li><a href='?page=$total[page]&list=$list'>Last</a></li>";
+            }
+            
         }
+    }
+
+    function showSearchBox($list) {
+        ?>
+        <span id="search_box">
+            <form action="/view/mainpage.php" method="get">
+                <input type="hidden" name="list" value="<?php if(isset($list)) echo $list; else echo 10; ?>">
+                <select name="category">
+                    <option value="bp_title" <?php if(isset($_GET['category']) && $_GET['category'] == "bp_title") echo "selected"?>>title</option>
+                    <option value="bm_name" <?php if(isset($_GET['category']) && $_GET['category'] == "bm_name") echo "selected"?>>name</option>
+                    <option value="bp_contents" <?php if(isset($_GET['category']) && $_GET['category'] == "bp_contents") echo "selected"?>>content</option>
+                </select>
+                <input type="text" name="search" size="40" required="required" /> <button>Search</button>
+            </form>
+        </span>
+        <?php
     }
 ?>

@@ -18,9 +18,11 @@
 
     function showMember() {
         ?>
-        Logged at <a href=""><?php echo $_SESSION['id']; ?></a> .
-        <div>
-            <a href="../controller/logout.php"><button>Logout</button></a>
+        <div style="position: absolute; right: 10px; top: 10px;">
+            Logged at <a href="" style="color:rgb(240, 181, 54);"><?php echo $_SESSION['id']; ?></a> .
+            <div style="position: absolute; margin-top: 5px; right: 10px;">
+                <a href="../controller/logout.php"><button>Logout</button></a>
+            </div>
         </div>
         <?php
     }

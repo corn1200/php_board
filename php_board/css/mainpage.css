@@ -22,6 +22,7 @@ ul li {
 
 #board_area {
 	width: 900px;
+	margin-top: 50px;
 	position: relative;
 }
 .list-table {
@@ -44,4 +45,33 @@ ul li {
 	position: absolute;
 	margin-top:20px;
 	right: 0;
+}
+#page_num {
+	font-size: 14px;
+	margin-left: 260px;
+	margin-top:50px; 
+}
+#page_num ul li {
+	float: left;
+	margin-left: 10px; 
+	text-align: center;
+}
+.fo_re {
+	font-weight: bold;
+	color:rgb(240, 181, 54);
+	margin-left: 15px; 
+}
+#viewing {
+	position: absolute;
+	margin-top:20px;
+	left: 0;
+}
+#search_box {
+	position: absolute;
+	margin-top:20px;
+	left: 200px;
+}
+#search_box2 {
+	text-align: center;
+	margin-top: 30px;
 }

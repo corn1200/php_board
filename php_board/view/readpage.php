@@ -28,7 +28,7 @@
             echo notInvalidAccess('The wrong approach');
         }
     ?>
-    <button><a href="../">Back</a></button>
+    <button onclick="history.back()">Back</button>
     <div id="board_read">
         <h1><a href="/">Free Board</a></h1>
         <h2><?php echo $findPost['bp_title']; ?></h2>

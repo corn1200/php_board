@@ -3,8 +3,8 @@
     
     include './member_check.php';
     
-    $bp_title = $_POST['title'];
-    $bp_contents = $_POST['content'];
+    $bp_title = strip_tags($_POST['title'], '<a>');
+    $bp_contents = strip_tags($_POST['content'], '<a>');
     $idx = confirmId($_SESSION['id'] ? $_SESSION['id'] : $_COOKIE['cookieID']);
     $idxResult = $idx->fetch();
     $mem_idx = $idxResult["idx"];

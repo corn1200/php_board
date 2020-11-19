@@ -9,7 +9,7 @@
     $mem_idx = confirmId($_SESSION['id']);
     $mem_idx = $mem_idx->fetch();
     $mem_idx = $mem_idx['idx'];
-    $bc_content = $_POST['content'];
+    $bc_content = strip_tags($_POST['content'], '<a>');
     $bc_comment_time = strtotime("now");
     $idx = getComment($post_idx);
     $idx = $idx->fetch();

@@ -4,8 +4,8 @@
     include './member_check.php';
     include '../model/post.php';
     
-    $bp_title = $_POST['title'];
-    $bp_contents = $_POST['content'];
+    $bp_title = strip_tags($_POST['title'], '<a>');
+    $bp_contents = strip_tags($_POST['content'], '<a>');
     $isMinePost = confirmPostWasMine($_SESSION['id'], $_GET['idx']);
     $bp_modify_time = strtotime("now");
 
