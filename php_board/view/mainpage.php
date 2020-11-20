@@ -18,6 +18,8 @@ if (!isset($_SESSION['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/mainpage.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="/js/onChangeLeader.js"></script>
     <title>MainPage</title>
 </head>
 
@@ -33,12 +35,11 @@ if (!isset($_SESSION['id'])) {
         ?>
         <span id="viewing">
             Viewing :
-            <select id="num" name="list" onchange="location.href='/view/mainpage.php?list='+document.getElementById('num').options[document.getElementById('num').selectedIndex].text;">
-                <option required>list</option>
-                <option value="ten"> 10</option>
-                <option value="thirty"> 30</option>
-                <option value="fifty"> 50</option>
-                <option value="eighty"> 80</option>
+            <select id="num" name="list">
+                <option value="ten" <?php echo isSelected($_GET['list'],10); ?>> 10</option>
+                <option value="thirty" <?php echo isSelected($_GET['list'],30); ?>> 30</option>
+                <option value="fifty" <?php echo isSelected($_GET['list'],50); ?>> 50</option>
+                <option value="eighty" <?php echo isSelected($_GET['list'],80); ?>> 80</option>
             </select>
         </span>
         <span id="write_btn">

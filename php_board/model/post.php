@@ -32,17 +32,18 @@
 
         if(isset($category) && isset($search)) {
             if($category == "bm_name") {
-                $queryResult = DBQuery("select * from board_post where mem_idx in (select idx from board_member where bm_name like '%$search%') order by idx desc limit '{$startLimit}','{$limit}'");
+                $queryResult = DBQuery("SELECT * FROM board_post WHERE mem_idx IN (SELECT idx FROM board_member WHERE bm_name LIKE '%$search%') ORDER BY idx DESC LIMIT $startLimit,$limit");
             } else {
                 $queryResult = DBQuery("select * from board_post where $category like '%$search%' order by idx desc limit $startLimit,$limit");
-                $rowCount = $queryResult->rowCount();
-                if($rowCount < 1) {
-                    ?>
-                    <h1 style="margin-top: 100px; text-align: center;">Theres No Result</h1>
-                    <?php
-                    return;
-                }
+                
             }
+        }
+        $rowCount = $queryResult->rowCount();
+        if($rowCount < 1) {
+            ?>
+            <h1 style="margin-top: 100px; text-align: center;">Theres No Result</h1>
+            <?php
+            return;
         }
         while($postList = $queryResult->fetch()) {
             $searchNameQuery = DBQuery("select * from board_member where idx = '{$postList['mem_idx']}'");
@@ -200,13 +201,18 @@
             <form action="/view/mainpage.php" method="get">
                 <input type="hidden" name="list" value="<?php if(isset($list)) echo $list; else echo 10; ?>">
                 <select name="category">
-                    <option value="bp_title" <?php if(isset($_GET['category']) && $_GET['category'] == "bp_title") echo "selected"?>>title</option>
-                    <option value="bm_name" <?php if(isset($_GET['category']) && $_GET['category'] == "bm_name") echo "selected"?>>name</option>
-                    <option value="bp_contents" <?php if(isset($_GET['category']) && $_GET['category'] == "bp_contents") echo "selected"?>>content</option>
+                    <option value="bp_title" <?php echo isSelected($_GET['category'],"bp_title"); ?>>title</option>
+                    <option value="bm_name" <?php echo isSelected($_GET['category'],"bm_name"); ?>>name</option>
+                    <option value="bp_contents" <?php echo isSelected($_GET['category'],"bp_contents"); ?>>content</option>
                 </select>
-                <input type="text" name="search" size="40" required="required" /> <button>Search</button>
+                <input type="text" name="search" size="40" required="required" value="<?php echo $_GET['search']; ?>" /> <button>Search</button>
             </form>
         </span>
         <?php
+    }
+
+    function isSelected($category,$categoryName) {
+        if(isset($category) && $category == $categoryName)
+            return "selected"; 
     }
 ?>

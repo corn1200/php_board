@@ -28,6 +28,6 @@
             <input type="checkbox" name="maintain" id="idMaintain" value="keepLogin">Keep logged in
         </div>
     </form>
-    <a href="./signpage.php">SIGN</a>
+    <a href="./signpage.php" style="text-decoration: none; color:#333;">SIGN</a>
 </body>
 </html>

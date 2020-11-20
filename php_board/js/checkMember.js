@@ -7,7 +7,7 @@ $(document).ready(function(e) {
             userid = self.val();
         }
 
-        $.post("../controller/sign_checker.php", { userid: userid }, function(data) {
+        $.post("/controller/sign_checker.php", { userid: userid }, function(data) {
             self.parent().parent().find("#id_check").html(data);
             if(data == "ID already exists.") {
                 self.parent().parent().find("#id_check").css("color", "#F00");
@@ -16,7 +16,7 @@ $(document).ready(function(e) {
                 self.parent().parent().find("#id_check").css("color", "#00871d");
                 $('#submit').attr('disabled', false);
             } else {
-                self.parent().parent().find("#id_check").css("color", "#000");
+                self.parent().parent().find("#id_check").css("color", "#fafafa");
                 $('#submit').attr('disabled', true);
             }
         });
