@@ -3,8 +3,8 @@
     $search = $_POST['search'];
 
     if(isset($category) && isset($search)) {
-        echo "&category=$category&search=$search";
+        return "&category=$category&search=$search";
     } else {
-        echo "";
+        return "";
     }
 ?>

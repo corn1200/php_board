@@ -14,49 +14,72 @@
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Texturina:wght@100&display=swap" rel="stylesheet">
     <title>SignPage</title>
 </head>
 
-<body style="background-color: #484848;">
+<body style="background-color: #484848; font-family: 'Texturina', serif; text-shadow: 4px 4px 6px black;">
     <div class="container">
         <div class="row">
-            <button class="mdc-button mdc-button--raised" onclick="location.href = '/'" style="margin-top: 20px; background-color: #fc9f00; font-size: 15px;">
+            <button class="mdc-button mdc-button--raised" onclick="location.href = '/'" style="margin-top: 30px; background-color: #fc9f00; font-size: 15px;">
                 <div class="mdc-button__ripple"></div>
                 <i class="material-icons mdc-button__icon" aria-hidden="true">arrow_back_ios</i>
                 <span class="mdc-button__label">Back</span>
             </button>
-            <div class="mdc-card" style="margin-top: 50px; background-color: #212121; color: white;">
-                <h1 style="text-align: center;">SIGN</h1>
-                <form class="form-horizontal" action="/controller/sign.php" method="post" style="margin-top: 20px;">
+            <div class="mdc-card" style="margin-top: 30px; background-color: #212121; color: white;">
+                <h1 style="text-align: center; font-weight: bold;">SIGN</h1>
+                <form class="form-horizontal" action="/controller/sign.php" method="post">
                     <div class="form-group" style="margin-top: 30px;">
-                        <label for="id" class="col-sm-2 control-label">ID</label>
+                        <label for="id" class="col-sm-2 control-label">ID *</label>
                         <div class="col-sm-8">
                             <label class="col-sm-12 mdc-text-field mdc-text-field--outlined">
                                 <span class="mdc-notched-outline">
                                     <span class="mdc-notched-outline__leading"></span>
                                     <span class="mdc-notched-outline__trailing"></span>
                                 </span>
-                                <input type="text" class="mdc-text-field__input" name="id" placeholder="* ID" id="id" required>
+                                <i class="material-icons mdc-button__icon" style="margin-top: 15px;" aria-hidden="true">perm_identity</i>
+                                <input type="text" class="mdc-text-field__input" name="id" placeholder="* ID" id="id" style="color: white; font-size: 15px; margin-left: 10px;" required>
                             </label>
                             <div id="id_check" style="margin-top: 15px;">Please Type Your ID.</div>
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 15px;">
-                        <label for="password" class="col-sm-2 control-label">PASSWORD</label>
+                        <label for="password" class="col-sm-2 control-label">PASSWORD *</label>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control" name="password" placeholder="* PASSWORD" id="password" required>
+                            <label class="col-sm-12 mdc-text-field mdc-text-field--outlined">
+                                <span class="mdc-notched-outline">
+                                    <span class="mdc-notched-outline__leading"></span>
+                                    <span class="mdc-notched-outline__trailing"></span>
+                                </span>
+                                <i class="material-icons mdc-button__icon" style="margin-top: 15px;" aria-hidden="true">security</i>
+                                <input type="password" class="mdc-text-field__input" name="password" placeholder="* PASSWORD" id="password" style="color: white; font-size: 15px; margin-left: 10px;" required>
+                            </label>
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 30px;">
-                        <label for="retypepw" class="col-sm-2 control-label">Retype PASSWORD</label>
+                        <label for="retypepw" class="col-sm-2 control-label">Retype PASSWORD *</label>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control" name="retypepw" placeholder="* Retype PASSWORD" id="retypepw" required>
+                            <label class="col-sm-12 mdc-text-field mdc-text-field--outlined">
+                                <span class="mdc-notched-outline">
+                                    <span class="mdc-notched-outline__leading"></span>
+                                    <span class="mdc-notched-outline__trailing"></span>
+                                </span>
+                                <i class="material-icons mdc-button__icon" style="margin-top: 15px;" aria-hidden="true">repeat</i>
+                                <input type="password" class="mdc-text-field__input" name="retypepw" placeholder="* Retype PASSWORD" id="retypepw" style="color: white; font-size: 15px; margin-left: 10px;" required>
+                            </label>
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 30px;">
-                        <label for="name" class="col-sm-2 control-label">NAME</label>
+                        <label for="name" class="col-sm-2 control-label">NAME *</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="name" placeholder="* NAME" id="name" required>
+                            <label class="col-sm-12 mdc-text-field mdc-text-field--outlined">
+                                <span class="mdc-notched-outline">
+                                    <span class="mdc-notched-outline__leading"></span>
+                                    <span class="mdc-notched-outline__trailing"></span>
+                                </span>
+                                <i class="material-icons mdc-button__icon" style="margin-top: 15px;" aria-hidden="true">assignment</i>
+                                <input type="text" class="mdc-text-field__input" name="name" placeholder="* NAME" id="name" style="color: white; font-size: 15px; margin-left: 10px;" required>
+                            </label>
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 15px;">
@@ -72,25 +95,46 @@
                     <div class="form-group" style="margin-top: 15px;">
                         <label for="post_code" class="col-sm-2 control-label">POST CODE</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="post_code" placeholder="POST CODE" id="post_code">
+                            <label class="col-sm-12 mdc-text-field mdc-text-field--outlined">
+                                <span class="mdc-notched-outline">
+                                    <span class="mdc-notched-outline__leading"></span>
+                                    <span class="mdc-notched-outline__trailing"></span>
+                                </span>
+                                <i class="material-icons mdc-button__icon" style="margin-top: 15px;" aria-hidden="true">local_post_office</i>
+                                <input type="text" class="mdc-text-field__input" name="post_code" placeholder="POST CODE" id="post_code" style="color: white; font-size: 15px; margin-left: 10px;">
+                            </label>
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 30px;">
                         <label for="address" class="col-sm-2 control-label">ADDRESS</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="address" placeholder="ADDRESS" id="address">
+                            <label class="col-sm-12 mdc-text-field mdc-text-field--outlined">
+                                <span class="mdc-notched-outline">
+                                    <span class="mdc-notched-outline__leading"></span>
+                                    <span class="mdc-notched-outline__trailing"></span>
+                                </span>
+                                <i class="material-icons mdc-button__icon" style="margin-top: 15px;" aria-hidden="true">room</i>
+                                <input type="text" class="mdc-text-field__input" name="address" placeholder="ADDRESS" id="address" style="color: white; font-size: 15px; margin-left: 10px;">
+                            </label>
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 30px;">
                         <label for="detail_address" class="col-sm-2 control-label">DETAIL ADDRESS</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="detail_address" placeholder="DETAIL ADDRESS" id="detail_address">
+                            <label class="col-sm-12 mdc-text-field mdc-text-field--outlined">
+                                <span class="mdc-notched-outline">
+                                    <span class="mdc-notched-outline__leading"></span>
+                                    <span class="mdc-notched-outline__trailing"></span>
+                                </span>
+                                <i class="material-icons mdc-button__icon" style="margin-top: 15px;" aria-hidden="true">apartment</i>
+                                <input type="text" class="mdc-text-field__input" name="detail_address" placeholder="DETAIL ADDRESS" id="detail_address" style="color: white; font-size: 15px; margin-left: 10px;">
+                            </label>
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
                         <label for="submit" class="col-sm-5 control-label"></label>
                         <div class="col-sm-2">
-                            <button class="mdc-button mdc-button--raised form-control" id="submit" style="background-color: #fc9f00; font-size: 15px;">
+                            <button class="mdc-button mdc-button--raised form-control" id="submit" style="background-color: #fc9f00; font-size: 15px;" disabled="">
                                 <div class="mdc-button__ripple"></div>
                                 <i class="material-icons mdc-button__icon" aria-hidden="true">person_add</i>
                                 <span class="mdc-button__label">SIGN</span>
