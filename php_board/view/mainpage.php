@@ -2,6 +2,7 @@
 session_start();
 
 include '../controller/member_check.php';
+include '../model/post.php';
 
 if (!isset($_SESSION['id'])) {
     if (!isset($_COOKIE['cookieID'])) {
@@ -17,7 +18,6 @@ if (!isset($_SESSION['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" type="text/css" href="../css/mainpage.css"> -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="/js/onChangeLeader.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -38,155 +38,134 @@ if (!isset($_SESSION['id'])) {
             mainContentEl.querySelector('input, button').focus();
         });
     </script>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .tc {
+            text-align: center;
+        }
+
+        .list-table {
+            margin-top: 60px;
+        }
+
+        .list-table thead th {
+            height: 40px;
+            border-top: 2px solid #38006b;
+            border-bottom: 1px solid #CCC;
+            font-weight: bold;
+            font-size: 17px;
+            text-align: center;
+        }
+
+        .list-table tbody td {
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #CCC;
+            height: 20px;
+            font-size: 14px
+        }
+
+        #page_num {
+            font-size: 14px;
+            margin-left: 260px;
+            margin-top: 50px;
+        }
+
+        #page_num ul li {
+            float: left;
+            margin-left: 10px;
+            text-align: center;
+        }
+
+        .fo_re {
+            font-weight: bold;
+            color: #38006b;
+            margin-left: 15px;
+        }
+    </style>
     <title>MainPage</title>
 </head>
 
 <body>
-    <header class="mdc-top-app-bar" style="left: 0;">
-        <div class="mdc-top-app-bar__row">
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">account_circle</button>
-                <span class="mdc-top-app-bar__title">
-                    <a href="/" style="text-decoration: none;">
-                        <h1 style="font-weight: bold; color: white; margin-bottom: 30px;">Free Board</h1>
-                    </a>
-                </span>
-                <span class="mdc-top-app-bar__title">
-                    <h4>You can write freely!</h4>
-                </span>
-            </section>
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-middle" style="color: black;">
-                <?php
-                include '../model/post.php';
-
-                echo showSearchBox($_GET['list']);
-                ?>
-            </section>
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-                <div class="btn-group" style="margin-right: 10px;">
-                    <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false" aria-label="Options">more_vert
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/controller/logout.php">Logout</a></li>
-                        <li><a href="/view/signpage.php">Sign</a></li>
-                    </ul>
-                </div>
-                <?php echo showMember(); ?>
-            </section>
-
-        </div>
-    </header>
+    <?php
+    echo showAppBar();
+    ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3" style="margin-top: 65px;">
-                <aside class="mdc-drawer">
+                <aside class="mdc-drawer" style="border-bottom:1px solid #CCC;">
                     <div class="mdc-drawer__content">
                         <nav class="mdc-list">
-                            <a class="mdc-list-item mdc-list-item--activated" href="#" aria-current="page">
+                            <a class="mdc-list-item mdc-list-item--activated" href="./writepage.php" aria-current="page">
                                 <span class="mdc-list-item__ripple"></span>
-                                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
-                                <span class="mdc-list-item__text">Inbox</span>
+                                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">create</i>
+                                <span class="mdc-list-item__text" id="write_btn">Writing</span>
                             </a>
-                            <a class="mdc-list-item" href="#">
+                            <a class="mdc-list-item">
                                 <span class="mdc-list-item__ripple"></span>
                                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i>
-                                <span class="mdc-list-item__text">Star</span>
-                            </a>
-                            <a class="mdc-list-item" href="#">
-                                <span class="mdc-list-item__ripple"></span>
-                                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
-                                <span class="mdc-list-item__text">Sent Mail</span>
-                            </a>
-                            <a class="mdc-list-item" href="#">
-                                <span class="mdc-list-item__ripple"></span>
-                                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
-                                <span class="mdc-list-item__text">Drafts</span>
-                            </a>
-
-                            <hr class="mdc-list-divider">
-                            <h6 class="mdc-list-group__subheader">Labels</h6>
-                            <a class="mdc-list-item" href="#">
-                                <span class="mdc-list-item__ripple"></span>
-                                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i>
-                                <span class="mdc-list-item__text">Family</span>
-                            </a>
-                            <a class="mdc-list-item" href="#">
-                                <span class="mdc-list-item__ripple"></span>
-                                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i>
-                                <span class="mdc-list-item__text">Friends</span>
-                            </a>
-                            <a class="mdc-list-item" href="#">
-                                <span class="mdc-list-item__ripple"></span>
-                                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i>
-                                <span id="viewing">
+                                <span class="mdc-list-item__text" id="viewing">
                                     Viewing :
-                                    <select id="num" name="list">
-                                        <option value="ten" <?php echo isSelected($_GET['list'], 10); ?>> 10</option>
-                                        <option value="thirty" <?php echo isSelected($_GET['list'], 30); ?>> 30</option>
-                                        <option value="fifty" <?php echo isSelected($_GET['list'], 50); ?>> 50</option>
-                                        <option value="eighty" <?php echo isSelected($_GET['list'], 80); ?>> 80</option>
-                                    </select>
                                 </span>
+                                <select id="num" name="list" style="border-style: none;">
+                                    <option value="thirty" <?php echo isSelected($_GET['list'], 30); ?>> 30</option>
+                                    <option value="ten" <?php echo isSelected($_GET['list'], 10); ?>> 10</option>
+                                    <option value="fifty" <?php echo isSelected($_GET['list'], 50); ?>> 50</option>
+                                    <option value="eighty" <?php echo isSelected($_GET['list'], 80); ?>> 80</option>
+                                </select>
                             </a>
                         </nav>
                     </div>
                 </aside>
             </div>
-            <div class="col-sm-9" style="margin-top: 65px;">
-                <div id="board_area">
-                    <!-- <a href="/">
-            <h1>Free Board</h1>
-        </a>
-        <h4>You can write freely!</h4> -->
-
-                    <!-- <span id="viewing">
-                        Viewing :
-                        <select id="num" name="list">
-                            <option value="ten" <?php echo isSelected($_GET['list'], 10); ?>> 10</option>
-                            <option value="thirty" <?php echo isSelected($_GET['list'], 30); ?>> 30</option>
-                            <option value="fifty" <?php echo isSelected($_GET['list'], 50); ?>> 50</option>
-                            <option value="eighty" <?php echo isSelected($_GET['list'], 80); ?>> 80</option>
-                        </select>
-                    </span> -->
-                    <span id="write_btn">
-                        <a href="./writepage.php"><button>Writing</button></a>
-                    </span>
-                    <table class="list-table">
-                        <thead>
-                            <tr>
-                                <th width="70">No.</th>
-                                <th width="500">Title</th>
-                                <th width="120">Writer</th>
-                                <th width="150">Date Created</th>
-                                <th width="100">Hit</th>
-                            </tr>
-                        </thead>
-                        <?php
-                        $page = getPageNum($_GET['page']);
-                        $row_num = getPost($_GET['category'], $_GET['search'])->rowCount();
-                        $list = getListNum($_GET['list']);
-                        $block_ct = 5;
-                        $block = calcBlockData($page, $block_ct);
-                        $total = calcPageData($row_num, $list, $block_ct);
-                        if ($block['end'] > $total['page']) {
-                            $block['end'] = $total['page'];
-                        }
-                        $start_num = ($page - 1) * $list;
-
-                        echo readPostList($start_num, $list, $_GET['category'], $_GET['search']);
-                        ?>
-                    </table>
-                    <?php
-                    // if ($_GET['list'] >= 30 && $_GET['page'] != $total) echo showSearchBox($_GET['list']);
-                    ?>
-                    <div id="page_num">
-                        <ul>
+            <div class="col-sm-6" style="margin-top: 65px;">
+                <div class="mdc-card">
+                    <div id="board_area" style="margin-left: 30px; margin-right: 30px; margin-top: -20px; margin-bottom: 20px;">
+                        <table class="list-table">
+                            <thead>
+                                <tr>
+                                    <th width="70">No.</th>
+                                    <th width="500">Title</th>
+                                    <th width="120">Writer</th>
+                                    <th width="150">Date Created</th>
+                                    <th width="100">Hit</th>
+                                </tr>
+                            </thead>
                             <?php
-                            echo showPagingView($page, $block, $total, $list, $_GET['category'], $_GET['search']);
+                            $page = getPageNum($_GET['page']);
+                            $row_num = getPost($_GET['category'], $_GET['search'])->rowCount();
+                            $list = getListNum($_GET['list']);
+                            $block_ct = 5;
+                            $block = calcBlockData($page, $block_ct);
+                            $total = calcPageData($row_num, $list, $block_ct);
+                            if ($block['end'] > $total['page']) {
+                                $block['end'] = $total['page'];
+                            }
+                            $start_num = ($page - 1) * $list;
+
+                            echo readPostList($start_num, $list, $_GET['category'], $_GET['search']);
                             ?>
-                        </ul>
+                        </table>
                     </div>
+                </div>
+                <div id="page_num" style="margin-top: 0px; margin-bottom: 50px;">
+                    <ul>
+                        <?php
+                        echo showPagingView($page, $block, $total, $list, $_GET['category'], $_GET['search']);
+                        ?>
+                    </ul>
                 </div>
             </div>
         </div>

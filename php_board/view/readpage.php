@@ -1,75 +1,117 @@
 <?php
-    session_start();
+session_start();
 
-    include '../model/post.php';
-    include '../controller/readcomment.php';
+include '../model/post.php';
+include '../controller/readcomment.php';
 ?>
 <!doctype html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <title>ReadPage</title>
     <link rel="stylesheet" type="text/css" href="../css/readpage.css" />
     <script type="text/javascript" src="../js/modifyDialog.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script>
+        const listEl = document.querySelector('.mdc-drawer .mdc-list');
+        const mainContentEl = document.querySelector('.main-content');
+
+        listEl.addEventListener('click', (event) => {
+            mainContentEl.querySelector('input, button').focus();
+        });
+
+        document.body.addEventListener('MDCDrawer:closed', () => {
+            mainContentEl.querySelector('input, button').focus();
+        });
+    </script>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 
 <body>
     <?php
-        echo showMember();
-        $idxOfPost = $_GET['idx'];
-        if(isPostIdxValid($idxOfPost)) {
-            somebodyHitPost($idxOfPost);
-            $searchPostQuery = searchPostByIDX($idxOfPost);
-            $findPost = $searchPostQuery->fetch();
-            $searchMemberQuery = confirmMemberByIDX($findPost['mem_idx']);
-            $findMember = $searchMemberQuery->fetch();
-            $createDate = dateConversion($findPost['bp_create_time']);
-        } else {
-            echo notInvalidAccess('The wrong approach');
-        }
+    echo showAppBar();
     ?>
-    <button><a href="/">Back</a></button>
-    <div id="board_read">
-        <h1><a href="/">Free Board</a></h1>
-        <h2><?php echo $findPost['bp_title']; ?></h2>
-        <div id="user_info">
-            <a href=""><?php echo $findMember['bm_name']." | "; ?></a>
-            <?php echo $createDate." | "; ?>
-            <?php echo "hit : ".$findPost['bp_hit']; ?>
-            <?php 
-                if(isset($findPost['bp_modify_time'])) {
-                    $modifyDate = dateConversion($findPost['bp_modify_time']);
-                    echo " >> modify : ".$modifyDate;  
+    <div class="container">
+        <div class="row" style="margin-top: 100px;">
+            <!-- <button><a href="/">Back</a></button> -->
+            <div class="mdc-card">
+                <?php
+                $idxOfPost = $_GET['idx'];
+                if (isPostIdxValid($idxOfPost)) {
+                    somebodyHitPost($idxOfPost);
+                    $searchPostQuery = searchPostByIDX($idxOfPost);
+                    $findPost = $searchPostQuery->fetch();
+                    $searchMemberQuery = confirmMemberByIDX($findPost['mem_idx']);
+                    $findMember = $searchMemberQuery->fetch();
+                    $createDate = dateConversion($findPost['bp_create_time']);
+                } else {
+                    echo notInvalidAccess('The wrong approach');
                 }
+                ?>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="board_read" style="margin: 30px;">
+                                <h2 style="text-align: center;"><?php echo $findPost['bp_title']; ?></h2>
+                                <div id="user_info" style="text-align: center;">
+                                    <a href=""><?php echo $findMember['bm_name'] . " | "; ?></a>
+                                    <?php echo $createDate . " | "; ?>
+                                    <?php echo "hit : " . $findPost['bp_hit']; ?>
+                                    <?php
+                                    if (isset($findPost['bp_modify_time'])) {
+                                        $modifyDate = dateConversion($findPost['bp_modify_time']);
+                                        echo " >> modify : " . $modifyDate;
+                                    }
+                                    ?>
+                                    <div id="bo_line"></div>
+                                </div>
+                                <div id="bo_content">
+                                    <?php echo nl2br("$findPost[bp_contents]"); ?>
+                                </div>
+                                <div id="bo_ser">
+                                    <ul>
+                                        <li><a href="/">[To List]</a></li>
+                                        <?php showModifyAndDelete($_SESSION['id'], $idxOfPost) ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dap_ins" style="margin-left: 400px;">
+                    <form action="../controller/comment_write.php?idx=<?php echo $idxOfPost; ?>" method="post">
+                        <div>
+                            <textarea name="content" class="reply_content" id="re_content" placeholder="Comment" required></textarea>
+
+                        </div>
+                        <button id="rep_bt" class="mdc-button mdc-button--raised" onclick="location.href = '/'" style="margin-left: 560px;  font-size: 15px; margin-bottom: 20px;">
+                            <div class="mdc-button__ripple"></div>
+                            <i class="material-icons mdc-button__icon" aria-hidden="true">comment</i>
+                            <span class="mdc-button__label">Comment</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="reply_view" style="margin-left: 0; margin-top: 0px;">
+                <h3>Comments</h3>
+            </div>
+            <?php
+            echo readCommentList($idxOfPost, 0, 10);
             ?>
-            <div id="bo_line"></div>
         </div>
-        <div id="bo_content">
-            <?php echo nl2br("$findPost[bp_contents]"); ?>
-        </div>
-        <div id="bo_ser">
-            <ul>
-                <li><a href="/">[To List]</a></li>
-                <?php showModifyAndDelete($_SESSION['id'], $idxOfPost) ?>
-            </ul>
-        </div>
-    </div>
-    <div class="reply_view">
-        <h3>Comments</h3>
-    </div>
-    <div class="dap_ins">
-        <form action="../controller/comment_write.php?idx=<?php echo $idxOfPost; ?>" method="post">
-            <div style="margin-top:10px; ">
-				<textarea name="content" class="reply_content" id="re_content" placeholder="Comment" required></textarea>
-				<button id="rep_bt" class="re_bt">Comment</button>
-			</div>
-		</form>
-	</div>
-    <?php
-        echo readCommentList($idxOfPost,0,10);
-    ?>
-    </div>
         <div id="foot_box"></div>
+    </div>
     </div>
 </body>
 

@@ -118,7 +118,7 @@
         if(isset($list)) {
             return $list;
         } else {
-            return 10;
+            return 30;
         }
     }
 
@@ -200,12 +200,13 @@
         <span id="search_box">
             <form action="/view/mainpage.php" method="get">
                 <input type="hidden" name="list" value="<?php if(isset($list)) echo $list; else echo 10; ?>">
-                <select name="category">
+                <select name="category" style="border-style: none; border-radius: 10px; background-color: rgba(0, 0, 0, 0); color: #fc9f00;">
                     <option value="bp_title" <?php echo isSelected($_GET['category'],"bp_title"); ?>>title</option>
                     <option value="bm_name" <?php echo isSelected($_GET['category'],"bm_name"); ?>>name</option>
                     <option value="bp_contents" <?php echo isSelected($_GET['category'],"bp_contents"); ?>>content</option>
                 </select>
-                <input type="text" name="search" size="40" required="required" value="<?php echo $_GET['search']; ?>" /> <button>Search</button>
+                <input type="text" name="search" style="border-style: none; border-radius: 10px; margin-left: 10px; margin-right: 10px;" size="40" required="required" value="<?php echo $_GET['search']; ?>" />
+                <button style="background-color: rgba(0, 0, 0, 0); border-style: none; border-radius: 10px; font-weight: bold; color: #fc9f00;">Search</button>
             </form>
         </span>
         <?php
@@ -214,5 +215,43 @@
     function isSelected($category,$categoryName) {
         if(isset($category) && $category == $categoryName)
             return "selected"; 
+    }
+
+    function showAppBar() {
+        ?>
+        <header class="mdc-top-app-bar" style="left: 0;">
+            <div class="mdc-top-app-bar__row">
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                    <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">account_circle</button>
+                    <span class="mdc-top-app-bar__title">
+                        <a href="/" style="text-decoration: none;">
+                            <h1 style="font-weight: bold; color: white; margin-bottom: 30px;">Free Board</h1>
+                        </a>
+                    </span>
+                    <span class="mdc-top-app-bar__title">
+                        <h4>You can write freely!</h4>
+                    </span>
+                </section>
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-middle" style="color: black;">
+                <?php
+                echo showSearchBox($_GET['list']);
+                ?>
+                </section>
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                    <div class="btn-group" style="margin-right: 10px;">
+                        <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false" aria-label="Options">more_vert
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/controller/logout.php">Logout</a></li>
+                            <li><a href="/view/signpage.php">Sign</a></li>
+                            <li><a href="/view/writepage.php">Write</a></li>
+                        </ul>
+                    </div>
+                <?php echo showMember(); ?>
+                </section>
+            </div>
+        </header>
+        <?php
     }
 ?>
