@@ -34,11 +34,16 @@ include '../model/post.php';
             text-decoration: none;
             color: black;
         }
+
+        a:hover {
+            text-decoration: none;
+            color: black;
+        }
     </style>
     <title>ModifyPage</title>
 </head>
 
-<body>
+<body style="background-color: #fafafa;">
     <?php
     echo showAppBar();
 
@@ -59,7 +64,8 @@ include '../model/post.php';
                                 <textarea name="content" id="ucontent" placeholder="Content" required><?php echo $findPost['bp_contents'] ?></textarea>
                             </div>
                             <div class="bt_se" style="margin-bottom: 20px;">
-                                <button type="submit" class="mdc-button mdc-button--raised" onclick="location.href = '/'" style="margin-top: 30px; font-size: 10px;">
+                                <button type="submit" class="mdc-button mdc-button--raised" onclick="location.href = '/'" style="margin-top: 30px; font-size: 10px;background: rgb(162,0,255);
+background: linear-gradient(90deg, rgba(162,0,255,1) 0%, rgba(91,3,250,1) 56%, rgba(55,4,255,1) 100%);">
                                     <div class="mdc-button__ripple"></div>
                                     <i class="material-icons mdc-button__icon" aria-hidden="true">create</i>
                                     <span class="mdc-button__label">Modifying</span>

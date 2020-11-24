@@ -34,11 +34,16 @@ include '../model/post.php';
             text-decoration: none;
             color: black;
         }
+
+        a:hover {
+            text-decoration: none;
+            color: black;
+        }
     </style>
     <title>WritePage</title>
 </head>
 
-<body>
+<body style="background-color: #fafafa;">
     <?php
     echo showAppBar();
     ?>

@@ -199,7 +199,7 @@
         ?>
         <span id="search_box">
             <form action="/view/mainpage.php" method="get">
-                <input type="hidden" name="list" value="<?php if(isset($list)) echo $list; else echo 10; ?>">
+                <input type="hidden" name="list" value="<?php if(isset($list)) echo $list; else echo 30; ?>">
                 <select name="category" style="border-style: none; border-radius: 10px; background-color: rgba(0, 0, 0, 0); color: #fc9f00;">
                     <option value="bp_title" <?php echo isSelected($_GET['category'],"bp_title"); ?>>title</option>
                     <option value="bm_name" <?php echo isSelected($_GET['category'],"bm_name"); ?>>name</option>
@@ -219,7 +219,8 @@
 
     function showAppBar() {
         ?>
-        <header class="mdc-top-app-bar" style="left: 0;">
+        <header class="mdc-top-app-bar" style="left: 0;background: rgb(162,0,255);
+background: linear-gradient(90deg, rgba(162,0,255,1) 0%, rgba(91,3,250,1) 56%, rgba(55,4,255,1) 100%);">
             <div class="mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                     <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">account_circle</button>

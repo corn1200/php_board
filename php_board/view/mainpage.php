@@ -44,6 +44,11 @@ if (!isset($_SESSION['id'])) {
             color: black;
         }
 
+        a:hover {
+            text-decoration: none;
+            color: black;
+        }
+
         ul li {
             list-style: none;
         }
@@ -98,7 +103,7 @@ if (!isset($_SESSION['id'])) {
     <title>MainPage</title>
 </head>
 
-<body>
+<body style="background-color: #fafafa;">
     <?php
     echo showAppBar();
     ?>
@@ -108,14 +113,14 @@ if (!isset($_SESSION['id'])) {
                 <aside class="mdc-drawer" style="border-bottom:1px solid #CCC;">
                     <div class="mdc-drawer__content">
                         <nav class="mdc-list">
-                            <a class="mdc-list-item mdc-list-item--activated" href="./writepage.php" aria-current="page">
+                            <a class="mdc-list-item" href="./writepage.php" aria-current="page">
                                 <span class="mdc-list-item__ripple"></span>
                                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">create</i>
                                 <span class="mdc-list-item__text" id="write_btn">Writing</span>
                             </a>
                             <a class="mdc-list-item">
                                 <span class="mdc-list-item__ripple"></span>
-                                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i>
+                                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">view_headline</i>
                                 <span class="mdc-list-item__text" id="viewing">
                                     Viewing :
                                 </span>
