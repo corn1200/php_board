@@ -20,6 +20,7 @@ if (!isset($_SESSION['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="/js/onChangeLeader.js"></script>
+    <script type="text/javascript" src="/js/onChangeLeader2.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -125,17 +126,28 @@ if (!isset($_SESSION['id'])) {
                                     Viewing :
                                 </span>
                                 <select id="num" name="list" style="border-style: none;">
-                                    <option value="thirty" <?php echo isSelected($_GET['list'], 30); ?>> 30</option>
                                     <option value="ten" <?php echo isSelected($_GET['list'], 10); ?>> 10</option>
+                                    <option value="thirty" <?php echo isSelected($_GET['list'], 30); ?>> 30</option>
                                     <option value="fifty" <?php echo isSelected($_GET['list'], 50); ?>> 50</option>
                                     <option value="eighty" <?php echo isSelected($_GET['list'], 80); ?>> 80</option>
+                                </select>
+                            </a>
+                            <a class="mdc-list-item">
+                                <span class="mdc-list-item__ripple"></span>
+                                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">sort</i>
+                                <span class="mdc-list-item__text" id="viewing">
+                                    Sorting By :
+                                </span>
+                                <select id="order" name="order" style="border-style: none;">
+                                    <option value="default" <?php echo isSelected($_GET['order'], "default"); ?>>default</option>
+                                    <option value="hit" <?php echo isSelected($_GET['order'], "hit"); ?>>hit</option>
                                 </select>
                             </a>
                         </nav>
                     </div>
                 </aside>
             </div>
-            <div class="col-sm-6" style="margin-top: 65px;">
+            <div class="col-sm-6" style="margin-top: 90px;">
                 <div class="mdc-card">
                     <div id="board_area" style="margin-left: 30px; margin-right: 30px; margin-top: -20px; margin-bottom: 20px;">
                         <table class="list-table">
@@ -160,7 +172,7 @@ if (!isset($_SESSION['id'])) {
                             }
                             $start_num = ($page - 1) * $list;
 
-                            echo readPostList($start_num, $list, $_GET['category'], $_GET['search']);
+                            echo readPostList($start_num, $list, $_GET['category'], $_GET['search'], $_GET['order']);
                             ?>
                         </table>
                     </div>

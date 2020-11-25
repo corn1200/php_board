@@ -27,18 +27,18 @@ if (isset($_SESSION['id'])) {
     <title>LoginPage</title>
 </head>
 
-<body style="background-color: #484848; font-family: 'Texturina', serif; text-shadow: 4px 4px 6px black;">
+<body style="background: rgb(63,94,251); background: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); font-family: 'Texturina', serif;">
     <div class="container">
-        <div class="mdc-card" style="margin-top: 95px; background-color: #212121; color: white;">
+        <div class="mdc-card" style="margin-top: 95px;">
             <div class="row">
                 <div class="col-sm-6">
                     <img src="https://images.unsplash.com/photo-1606055292780-79987ee44af7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" style="width: 100%; height: auto;">
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" style="text-shadow: 2px 2px 6px #aeaeae;">
                     <h1 style="text-align: center; margin-top: 200px; font-weight: bold;">LOGIN</h1>
                     <form class="form-horizontal" action="../controller/login.php" method="POST">
                         <div class="form-group" style="margin-top: 30px;">
-                            <label for="id" class="col-sm-2 control-label">ID</label>
+                            <label for="id" class="col-sm-2 control-label" >ID</label>
                             <div class="col-sm-8">
                                 <label class="col-sm-12 mdc-text-field mdc-text-field--outlined">
                                     <span class="mdc-notched-outline">
@@ -46,7 +46,7 @@ if (isset($_SESSION['id'])) {
                                         <span class="mdc-notched-outline__trailing"></span>
                                     </span>
                                     <i class="material-icons mdc-button__icon" style="margin-top: 15px;" aria-hidden="true">perm_identity</i>
-                                    <input type="text" class="mdc-text-field__input" name="id" placeholder="* ID" id="id" style="color: white; font-size: 15px; margin-left: 10px;" required>
+                                    <input type="text" class="mdc-text-field__input" name="id" placeholder="* ID" id="id" style="font-size: 15px; margin-left: 10px;" required autofocus>
                                 </label>
                             </div>
                         </div>
@@ -59,14 +59,14 @@ if (isset($_SESSION['id'])) {
                                         <span class="mdc-notched-outline__trailing"></span>
                                     </span>
                                     <i class="material-icons mdc-button__icon" style="margin-top: 15px;" aria-hidden="true">security</i>
-                                    <input type="password" class="mdc-text-field__input" name="password" placeholder="* PASSWORD" id="password" style="color: white; font-size: 15px; margin-left: 10px;" required>
+                                    <input type="password" class="mdc-text-field__input" name="password" placeholder="* PASSWORD" id="password" style="font-size: 15px; margin-left: 10px;" required>
                                 </label>
                             </div>
                         </div>
                         <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
                             <label for="submit" class="col-sm-4 control-label"></label>
                             <div class="col-sm-4">
-                                <button class="mdc-button mdc-button--raised form-control" value="LOGIN" id="submit" style="background-color: #fc9f00; font-size: 15px;">
+                                <button class="mdc-button mdc-button--raised form-control" value="LOGIN" id="submit" style="font-size: 15px;">
                                     <div class="mdc-button__ripple"></div>
                                     <i class="material-icons mdc-button__icon" aria-hidden="true">login</i>
                                     <span class="mdc-button__label">LOGIN</span>
@@ -87,10 +87,10 @@ if (isset($_SESSION['id'])) {
                                         </div>
                                         <div class="mdc-checkbox__ripple"></div>
                                     </div>
-                                    <label for="idMaintain" style="font-size: 15px; color: white; font-weight: bold;">Keep logged in</label>
+                                    <label for="idMaintain" style="font-size: 15px;font-weight: bold;">Keep logged in</label>
                                 </div>
                                 <span> / </span>
-                                <a href="./signpage.php" style="text-decoration: none; color:#333; color: white; font-weight: bold;">SIGN</a>
+                                <a href="./signpage.php" style="text-decoration: none; color: black; font-weight: bold;">SIGN</a>
                             </div>
                         </div>
                     </form>

@@ -19,7 +19,7 @@
     function showMember() {
         ?>
         <div style="position: relative; margin-bottom: 5px;">
-            Logged at <a href="" style="color: #fc9f00;"><?php echo $_SESSION['id']; ?></a> .
+            Logged at <a href="" style="color: #fc9f00; font-weight: bold;"><?php echo $_SESSION['id']; ?></a> .
         </div>
         <?php
     }

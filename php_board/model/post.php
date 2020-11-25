@@ -27,15 +27,26 @@
         }
     }
 
-    function readPostList($startLimit,$limit,$category,$search) {
-        $queryResult = DBQuery("select * from board_post order by idx desc limit $startLimit,$limit");
+    function readPostList($startLimit,$limit,$category,$search,$order) {
+        if(isset($order) && $order == "hit") {
+            $queryResult = DBQuery("select * from board_post order by bp_hit desc, idx desc limit $startLimit,$limit");
+        } else {
+            $queryResult = DBQuery("select * from board_post order by idx desc limit $startLimit,$limit");
+        }
 
         if(isset($category) && isset($search)) {
             if($category == "bm_name") {
-                $queryResult = DBQuery("SELECT * FROM board_post WHERE mem_idx IN (SELECT idx FROM board_member WHERE bm_name LIKE '%$search%') ORDER BY idx DESC LIMIT $startLimit,$limit");
+                if(isset($order) && $order == "hit") {
+                    $queryResult = DBQuery("SELECT * FROM board_post WHERE mem_idx IN (SELECT idx FROM board_member WHERE bm_name LIKE '%$search%') ORDER BY bp_hit DESC, idx DESC LIMIT $startLimit,$limit");
+                } else {
+                    $queryResult = DBQuery("SELECT * FROM board_post WHERE mem_idx IN (SELECT idx FROM board_member WHERE bm_name LIKE '%$search%') ORDER BY idx DESC LIMIT $startLimit,$limit");
+                }
             } else {
-                $queryResult = DBQuery("select * from board_post where $category like '%$search%' order by idx desc limit $startLimit,$limit");
-                
+                if(isset($order) && $order == "hit") {
+                    $queryResult = DBQuery("select * from board_post where $category like '%$search%' order by bp_hit desc, idx desc limit $startLimit,$limit");
+                } else {
+                    $queryResult = DBQuery("select * from board_post where $category like '%$search%' order by idx desc limit $startLimit,$limit");
+                }
             }
         }
         $rowCount = $queryResult->rowCount();
@@ -57,7 +68,7 @@
         <tbody>
             <tr>
                 <td width="70"><?php echo $postList['idx'] ?></td>
-                <td width="500"><a href="/view/readpage.php?idx=<?php echo $postList['idx']; ?>"><?php echo $title; if($postList['bp_comment_count'] >= 1) echo "[".$postList['bp_comment_count']."]" ?></a></td>
+                <td width="500"><a href="/view/readpage.php?idx=<?php echo $postList['idx']; ?>"><?php echo $title; if($postList['bp_comment_count'] >= 1) echo " [".$postList['bp_comment_count']."]" ?></a></td>
                 <td width="120"><a href=""><?php echo $findName['bm_name'] ?></a></td>
                 <td width="150"><?php echo $writetime ?></td>
                 <td width="100"><?php echo $postList['bp_hit'] ?></td>
@@ -195,12 +206,13 @@
         }
     }
 
-    function showSearchBox($list) {
+    function showSearchBox($list, $order) {
         ?>
         <span id="search_box">
             <form action="/view/mainpage.php" method="get">
                 <input type="hidden" name="list" value="<?php if(isset($list)) echo $list; else echo 30; ?>">
-                <select name="category" style="border-style: none; border-radius: 10px; background-color: rgba(0, 0, 0, 0); color: #fc9f00;">
+                <input type="hidden" name="order" value="<?php if(isset($order)) echo $order; else echo 'default'; ?>">
+                <select name="category" style="font-weight: bold; border-style: none; border-radius: 10px; background-color: rgba(0, 0, 0, 0); color: #fc9f00;">
                     <option value="bp_title" <?php echo isSelected($_GET['category'],"bp_title"); ?>>title</option>
                     <option value="bm_name" <?php echo isSelected($_GET['category'],"bm_name"); ?>>name</option>
                     <option value="bp_contents" <?php echo isSelected($_GET['category'],"bp_contents"); ?>>content</option>
@@ -214,13 +226,14 @@
 
     function isSelected($category,$categoryName) {
         if(isset($category) && $category == $categoryName)
-            return "selected"; 
+            return "selected";
+        elseif(!isset($category) && $categoryName == 30)
+            return "selected";
     }
 
     function showAppBar() {
         ?>
-        <header class="mdc-top-app-bar" style="left: 0;background: rgb(162,0,255);
-background: linear-gradient(90deg, rgba(162,0,255,1) 0%, rgba(91,3,250,1) 56%, rgba(55,4,255,1) 100%);">
+        <header class="mdc-top-app-bar" style="left: 0; background: rgb(162,0,255); background: linear-gradient(90deg, rgba(162,0,255,1) 0%, rgba(91,3,250,1) 56%, rgba(55,4,255,1) 100%);">
             <div class="mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                     <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">account_circle</button>
@@ -235,7 +248,7 @@ background: linear-gradient(90deg, rgba(162,0,255,1) 0%, rgba(91,3,250,1) 56%, r
                 </section>
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-middle" style="color: black;">
                 <?php
-                echo showSearchBox($_GET['list']);
+                echo showSearchBox($_GET['list'], $_GET['order']);
                 ?>
                 </section>
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">

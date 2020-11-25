@@ -16,7 +16,7 @@ $(document).ready(function(e) {
                 self.parent().parent().find("#id_check").css("color", "#00871d");
                 $('#submit').attr('disabled', false);
             } else {
-                self.parent().parent().find("#id_check").css("color", "#fafafa");
+                self.parent().parent().find("#id_check").css("color", "#000000");
                 $('#submit').attr('disabled', true);
             }
         });

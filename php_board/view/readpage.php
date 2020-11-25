@@ -49,8 +49,7 @@ include '../controller/readcomment.php';
     ?>
     <div class="container">
         <div class="row" style="margin-top: 100px;">
-            <!-- <button><a href="/">Back</a></button> -->
-            <div class="mdc-card">
+            <div class="mdc-card" style="min-height: 500px;">
                 <?php
                 $idxOfPost = $_GET['idx'];
                 if (isPostIdxValid($idxOfPost)) {
@@ -94,23 +93,23 @@ include '../controller/readcomment.php';
                         </div>
                     </div>
                 </div>
-                <div class="dap_ins" style="margin-left: 400px;">
+            </div>
+            
+            <div class="reply_view" style="margin-top: 20px;">
+                <span>
                     <form action="../controller/comment_write.php?idx=<?php echo $idxOfPost; ?>" method="post">
                         <div>
-                            <textarea name="content" class="reply_content" id="re_content" placeholder="Comment" required></textarea>
-
+                            <textarea name="content" class="reply_content" id="re_content" placeholder="Comment" style="width: 1170px;" required></textarea>
                         </div>
-                        <button id="rep_bt" class="mdc-button mdc-button--raised" onclick="location.href = '/'" style="margin-left: 560px;  font-size: 15px; margin-bottom: 20px; background: rgb(162,0,255); background: linear-gradient(90deg, rgba(162,0,255,1) 0%, rgba(91,3,250,1) 56%, rgba(55,4,255,1) 100%);">
+                        <button id="rep_bt" class="mdc-button mdc-button--raised" onclick="location.href = '/'" style="position: absolute; right: 370px; float: right; font-size: 15px; background: rgb(162,0,255); background: linear-gradient(90deg, rgba(162,0,255,1) 0%, rgba(91,3,250,1) 56%, rgba(55,4,255,1) 100%);">
                             <div class="mdc-button__ripple"></div>
                             <i class="material-icons mdc-button__icon" aria-hidden="true">comment</i>
                             <span class="mdc-button__label">Comment</span>
                         </button>
                     </form>
-                </div>
+                </span>
             </div>
-            <div class="reply_view" style="margin-left: 0; margin-top: 0px;">
-                <h3>Comments</h3>
-            </div>
+            <h3>Comments</h3>
             <?php
             echo readCommentList($idxOfPost, 0, 10);
             ?>
