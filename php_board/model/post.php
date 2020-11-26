@@ -146,13 +146,13 @@
         return $total;
     }
 
-    function pagingButton($category, $search, $order, $page, $list, $message) {
+    function pagingButton($category, $search, $order, $pagenation, $list, $message) {
         if(isset($category) && isset($search)) {
-            if(isset($order)) echo "<li><a href='?page=$page&list=$list&order=$order&category=$category&search=$search'>$message</a></li>";
-            else echo "<li><a href='?page=$page&list=$list&category=$category&search=$search'>$message</a></li>";
+            if(isset($order)) echo "<li><a href='?page=$pagenation&list=$list&order=$order&category=$category&search=$search'>$message</a></li>";
+            else echo "<li><a href='?page=$pagenation&list=$list&category=$category&search=$search'>$message</a></li>";
         } else {
-            if(isset($order)) echo "<li><a href='?page=1&list=$list&order=$order'>$message</a></li>";
-            else echo "<li><a href='?page=$page&list=$list'>$message</a></li>";
+            if(isset($order)) echo "<li><a href='?page=$pagenation&list=$list&order=$order'>$message</a></li>";
+            else echo "<li><a href='?page=$pagenation&list=$list'>$message</a></li>";
         }
     }
 
@@ -174,29 +174,28 @@
 
         } else {
             $pre = $page - 1;
-            // pagingButton($category, $search, $order, $pre, $list, "Prev");
-            if(isset($category) && isset($search)) {
-                if(isset($order)) echo "<li><a href='?page=$pre&list=$list&order=$order&category=$category&search=$search'>Prev</a></li>";
-                else echo "<li><a href='?page=$pre&list=$list&category=$category&search=$search'>Prev</a></li>";
-            } else {
-                if(isset($order)) echo "<li><a href='?page=$pre&list=$list&order=$order'>Prev</a></li>";
-                else echo "<li><a href='?page=$pre&list=$list'>Prev</a></li>";
-            }
-            
+            pagingButton($category, $search, $order, $pre, $list, "Prev");
+            // if(isset($category) && isset($search)) {
+            //     if(isset($order)) echo "<li><a href='?page=$pre&list=$list&order=$order&category=$category&search=$search'>Prev</a></li>";
+            //     else echo "<li><a href='?page=$pre&list=$list&category=$category&search=$search'>Prev</a></li>";
+            // } else {
+            //     if(isset($order)) echo "<li><a href='?page=$pre&list=$list&order=$order'>Prev</a></li>";
+            //     else echo "<li><a href='?page=$pre&list=$list'>Prev</a></li>";
+            // }
         }
 
         for($i = $block['start']; $i <= $block['end']; $i++) {
             if($page == $i) {
                 echo "<li class='fo_re'>[$i]</li>";
             } else {
-                if(isset($category) && isset($search)) {
-                    if(isset($order)) echo "<li><a href='?page=$i&list=$list&order=$order&category=$category&search=$search'>[$i]</a></li>";
-                    else echo "<li><a href='?page=$i&list=$list&category=$category&search=$search'>[$i]</a></li>";
-                } else {
-                    if(isset($order)) echo "<li><a href='?page=$i&list=$list&order=$order'>[$i]</a></li>";
-                    else echo "<li><a href='?page=$i&list=$list'>[$i]</a></li>";
-                }
-                
+                pagingButton($category, $search, $order, $i, $list, '['.$i.']');
+                // if(isset($category) && isset($search)) {
+                //     if(isset($order)) echo "<li><a href='?page=$i&list=$list&order=$order&category=$category&search=$search'>[$i]</a></li>";
+                //     else echo "<li><a href='?page=$i&list=$list&category=$category&search=$search'>[$i]</a></li>";
+                // } else {
+                //     if(isset($order)) echo "<li><a href='?page=$i&list=$list&order=$order'>[$i]</a></li>";
+                //     else echo "<li><a href='?page=$i&list=$list'>[$i]</a></li>";
+                // }
             }
         }
 
@@ -204,27 +203,27 @@
 
         } else {
             $next = $page + 1;
-            if(isset($category) && isset($search)) {
-                if(isset($order)) echo "<li><a href='?page=$next&list=$list&order=$order&category=$category&search=$search'>Next</a></li>";
-                else echo "<li><a href='?page=$next&list=$list&category=$category&search=$search'>Next</a></li>";
-            } else {
-                if(isset($order)) echo "<li><a href='?page=$next&list=$list&order=$order'>Next</a></li>";
-                else echo "<li><a href='?page=$next&list=$list'>Next</a></li>";
-            }
-            
+            pagingButton($category, $search, $order, $next, $list, "Next");
+            // if(isset($category) && isset($search)) {
+            //     if(isset($order)) echo "<li><a href='?page=$next&list=$list&order=$order&category=$category&search=$search'>Next</a></li>";
+            //     else echo "<li><a href='?page=$next&list=$list&category=$category&search=$search'>Next</a></li>";
+            // } else {
+            //     if(isset($order)) echo "<li><a href='?page=$next&list=$list&order=$order'>Next</a></li>";
+            //     else echo "<li><a href='?page=$next&list=$list'>Next</a></li>";
+            // }
         }
 
         if($page >= $total['page']) {
             echo "<li class='fo_re'>Last</li>";
         } else {
-            if(isset($category) && isset($search)) {
-                if(isset($order)) echo "<li><a href='?page=$total[page]&list=$list&order=$order&category=$category&search=$search'>Last</a></li>";
-                else echo "<li><a href='?page=$total[page]&list=$list&category=$category&search=$search'>Last</a></li>";
-            } else {
-                if(isset($order)) echo "<li><a href='?page=$total[page]&list=$list&order=$order'>Last</a></li>";
-                else echo "<li><a href='?page=$total[page]&list=$list'>Last</a></li>";
-            }
-            
+            pagingButton($category, $search, $order, $total['page'], $list, "Last");
+            // if(isset($category) && isset($search)) {
+            //     if(isset($order)) echo "<li><a href='?page=$total[page]&list=$list&order=$order&category=$category&search=$search'>Last</a></li>";
+            //     else echo "<li><a href='?page=$total[page]&list=$list&category=$category&search=$search'>Last</a></li>";
+            // } else {
+            //     if(isset($order)) echo "<li><a href='?page=$total[page]&list=$list&order=$order'>Last</a></li>";
+            //     else echo "<li><a href='?page=$total[page]&list=$list'>Last</a></li>";
+            // }
         }
     }
 
