@@ -236,7 +236,7 @@
         <header class="mdc-top-app-bar" style="left: 0; background: rgb(162,0,255); background: linear-gradient(90deg, rgba(162,0,255,1) 0%, rgba(91,3,250,1) 56%, rgba(55,4,255,1) 100%);">
             <div class="mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                    <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">account_circle</button>
+                    <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu"><a href="/view/profilepage.php" style="color: white;">account_circle</a></button>
                     <span class="mdc-top-app-bar__title">
                         <a href="/" style="text-decoration: none;">
                             <h1 style="font-weight: bold; color: white; margin-bottom: 30px;">Free Board</h1>
