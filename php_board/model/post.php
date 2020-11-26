@@ -146,25 +146,41 @@
         return $total;
     }
 
-    function showPagingView($page, $block, $total, $list, $category, $search) {
+    function pagingButton($category, $search, $order, $page, $list, $message) {
+        if(isset($category) && isset($search)) {
+            if(isset($order)) echo "<li><a href='?page=$page&list=$list&order=$order&category=$category&search=$search'>$message</a></li>";
+            else echo "<li><a href='?page=$page&list=$list&category=$category&search=$search'>$message</a></li>";
+        } else {
+            if(isset($order)) echo "<li><a href='?page=1&list=$list&order=$order'>$message</a></li>";
+            else echo "<li><a href='?page=$page&list=$list'>$message</a></li>";
+        }
+    }
+
+    function showPagingView($page, $block, $total, $list, $category, $search, $order) {
         if($page <= 1) {
             echo "<li class='fo_re'>First</li>";
         } else {
-            if(isset($category) && isset($search)) {
-                echo "<li><a href='?page=1&list=$list&category=$category&search=$search'>First</a></li>";
-            } else {
-                echo "<li><a href='?page=1&list=$list'>First</a></li>";
-            }
+            pagingButton($category, $search, $order, 1, $list, "First");
+            // if(isset($category) && isset($search)) {
+            //     if(isset($order)) echo "<li><a href='?page=1&list=$list&order=$order&category=$category&search=$search'>First</a></li>";
+            //     else echo "<li><a href='?page=1&list=$list&category=$category&search=$search'>First</a></li>";
+            // } else {
+            //     if(isset($order)) echo "<li><a href='?page=1&list=$list&order=$order'>First</a></li>";
+            //     else echo "<li><a href='?page=1&list=$list'>First</a></li>";
+            // }
         }
         
         if($page <= 1) {
 
         } else {
             $pre = $page - 1;
+            // pagingButton($category, $search, $order, $pre, $list, "Prev");
             if(isset($category) && isset($search)) {
-                echo "<li><a href='?page=$pre&list=$list&category=$category&search=$search'>Prev</a></li>";
+                if(isset($order)) echo "<li><a href='?page=$pre&list=$list&order=$order&category=$category&search=$search'>Prev</a></li>";
+                else echo "<li><a href='?page=$pre&list=$list&category=$category&search=$search'>Prev</a></li>";
             } else {
-                echo "<li><a href='?page=$pre&list=$list'>Prev</a></li>";
+                if(isset($order)) echo "<li><a href='?page=$pre&list=$list&order=$order'>Prev</a></li>";
+                else echo "<li><a href='?page=$pre&list=$list'>Prev</a></li>";
             }
             
         }
@@ -174,9 +190,11 @@
                 echo "<li class='fo_re'>[$i]</li>";
             } else {
                 if(isset($category) && isset($search)) {
-                    echo "<li><a href='?page=$i&list=$list&category=$category&search=$search'>[$i]</a></li>";
+                    if(isset($order)) echo "<li><a href='?page=$i&list=$list&order=$order&category=$category&search=$search'>[$i]</a></li>";
+                    else echo "<li><a href='?page=$i&list=$list&category=$category&search=$search'>[$i]</a></li>";
                 } else {
-                    echo "<li><a href='?page=$i&list=$list'>[$i]</a></li>";
+                    if(isset($order)) echo "<li><a href='?page=$i&list=$list&order=$order'>[$i]</a></li>";
+                    else echo "<li><a href='?page=$i&list=$list'>[$i]</a></li>";
                 }
                 
             }
@@ -187,9 +205,11 @@
         } else {
             $next = $page + 1;
             if(isset($category) && isset($search)) {
-                echo "<li><a href='?page=$next&list=$list&category=$category&search=$search'>Next</a></li>";
+                if(isset($order)) echo "<li><a href='?page=$next&list=$list&order=$order&category=$category&search=$search'>Next</a></li>";
+                else echo "<li><a href='?page=$next&list=$list&category=$category&search=$search'>Next</a></li>";
             } else {
-                echo "<li><a href='?page=$next&list=$list'>Next</a></li>";
+                if(isset($order)) echo "<li><a href='?page=$next&list=$list&order=$order'>Next</a></li>";
+                else echo "<li><a href='?page=$next&list=$list'>Next</a></li>";
             }
             
         }
@@ -198,9 +218,11 @@
             echo "<li class='fo_re'>Last</li>";
         } else {
             if(isset($category) && isset($search)) {
-                echo "<li><a href='?page=$total[page]&list=$list&category=$category&search=$search'>Last</a></li>";
+                if(isset($order)) echo "<li><a href='?page=$total[page]&list=$list&order=$order&category=$category&search=$search'>Last</a></li>";
+                else echo "<li><a href='?page=$total[page]&list=$list&category=$category&search=$search'>Last</a></li>";
             } else {
-                echo "<li><a href='?page=$total[page]&list=$list'>Last</a></li>";
+                if(isset($order)) echo "<li><a href='?page=$total[page]&list=$list&order=$order'>Last</a></li>";
+                else echo "<li><a href='?page=$total[page]&list=$list'>Last</a></li>";
             }
             
         }

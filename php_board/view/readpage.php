@@ -101,7 +101,7 @@ include '../controller/readcomment.php';
                         <div>
                             <textarea name="content" class="reply_content" id="re_content" placeholder="Comment" style="width: 1170px;" required></textarea>
                         </div>
-                        <button id="rep_bt" class="mdc-button mdc-button--raised" onclick="location.href = '/'" style="position: absolute; right: 370px; float: right; font-size: 15px; background: rgb(162,0,255); background: linear-gradient(90deg, rgba(162,0,255,1) 0%, rgba(91,3,250,1) 56%, rgba(55,4,255,1) 100%);">
+                        <button id="rep_bt" class="mdc-button mdc-button--raised" style="position: absolute; right: 370px; float: right; font-size: 15px; background: rgb(162,0,255); background: linear-gradient(90deg, rgba(162,0,255,1) 0%, rgba(91,3,250,1) 56%, rgba(55,4,255,1) 100%);">
                             <div class="mdc-button__ripple"></div>
                             <i class="material-icons mdc-button__icon" aria-hidden="true">comment</i>
                             <span class="mdc-button__label">Comment</span>

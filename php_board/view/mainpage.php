@@ -180,7 +180,7 @@ if (!isset($_SESSION['id'])) {
                 <div id="page_num" style="margin-top: 0px; margin-bottom: 50px;">
                     <ul>
                         <?php
-                        echo showPagingView($page, $block, $total, $list, $_GET['category'], $_GET['search']);
+                        echo showPagingView($page, $block, $total, $list, $_GET['category'], $_GET['search'], $_GET['order']);
                         ?>
                     </ul>
                 </div>
