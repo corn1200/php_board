@@ -2,8 +2,8 @@
     include './member_check.php';
     
     $bm_id = strip_tags($_POST['id'], '<a>');
-    $bm_password = $_POST['password'];
-    $retypepw = $_POST['retypepw'];
+    $bm_password = hash("sha256", $_POST['password']);
+    $retypepw = hash("sha256", $_POST['retypepw']);
     $bm_name = strip_tags($_POST['name'], '<a>');
     $bm_address = strip_tags($_POST['address'], '<a>');
     $bm_address_num = strip_tags($_POST['post_code'], '<a>');
