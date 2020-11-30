@@ -12,7 +12,7 @@
     
     $bp_title = strip_tags($_POST['title'], '<a>');
     $bp_contents = strip_tags($_POST['content'], '<a>');
-    $isMinePost = confirmPostWasMine($_SESSION['id'], $_GET['idx']);
+    $isMinePost = confirmPostWasMine(isset($_SESSION['id']) ? $_SESSION['id'] : $_COOKIE['cookieID'], $_GET['idx']);
     $bp_modify_time = strtotime("now");
 
     if($bp_title && $bp_contents && $isMinePost && $bp_modify_time) {

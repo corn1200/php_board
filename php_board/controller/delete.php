@@ -11,7 +11,7 @@
     }
     
     $postIdx = $_GET['idx'];
-    $isMinePost = confirmPostWasMine($_SESSION['id'], $postIdx);
+    $isMinePost = confirmPostWasMine(isset($_SESSION['id']) ? $_SESSION['id'] : $_COOKIE['cookieID'], $postIdx);
 
     if($isMinePost) {
         $sql = DBQuery("delete from board_post where idx=$postIdx");

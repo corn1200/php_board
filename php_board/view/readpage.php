@@ -1,3 +1,17 @@
+<!-- 
+도제학생 김현승 / 게시판 프로젝트
+메인페이지에서 글 제목 클릭시 글의 내용을 볼 수 있는
+페이지입니다.
+
+2020/11/30 오후 5:06 김현승 수정 시작
+
+수정 내용: 메인페이지 포함 대다수 유저가 접근하는 페이지와
+유저가 동작할 수 있는 파일에 대해 세션 검사 방법이 바뀌어서
+로그인 유지 쿠키로 로그인 시 정상적으로 작동하지 않는 부분이 발견되어
+세션이 없을 시 쿠키를 조회하게 구조를 변경하였습니다.
+
+2020/11/30 오후 5:08 김현승 수정 종료
+ -->
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/controller/sessionHead.php';
 include $_SERVER['DOCUMENT_ROOT'].'/model/post.php';
@@ -93,7 +107,7 @@ if(checkAvailableAccess($loginData, $cookieData) == false) {
                                 <div id="bo_ser">
                                     <ul>
                                         <li><a href="/">[To List]</a></li>
-                                        <?php showModifyAndDelete($_SESSION['id'], $idxOfPost) ?>
+                                        <?php showModifyAndDelete(isset($_SESSION['id']) ? $_SESSION['id'] : $_COOKIE['cookieID'], $idxOfPost) ?>
                                     </ul>
                                 </div>
                             </div>
