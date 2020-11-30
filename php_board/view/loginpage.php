@@ -1,14 +1,12 @@
 <?php
-session_start();
+include $_SERVER['DOCUMENT_ROOT'].'/controller/sessionHead.php';
 
-include '../controller/member_check.php';
-
-if (isset($_SESSION['id'])) {
-    $logId = $_SESSION['id'];
-    echo alertMesseage('You are Already Logged in ' . $logId, '/view/mainpage.php');
-} elseif (isset($_COOKIE['cookieID'])) {
-    $logId = $_COOKIE['cookieID'];
-    echo alertMesseage('You are Already Logged in ' . $logId, '/view/mainpage.php');
+$loginData['id'] = $_SESSION['id'];
+$loginData['pw'] = $_SESSION['password'];
+$cookieData['id'] = $_COOKIE['cookieID'];
+$cookieData['pw'] = $_COOKIE['cookiePW'];
+if(checkAvailableAccess($loginData, $cookieData)) {
+    echo alertMesseage('You are already Logged in', '/view/mainpage.php');
 }
 ?>
 <!DOCTYPE html>

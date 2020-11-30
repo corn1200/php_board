@@ -1,5 +1,5 @@
 <?php
-    include '../model/member.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/model/member.php';
 
     $postIdData = $_POST['userid'];
 
@@ -42,5 +42,21 @@
     function loginTimeCheck($id) {
         $bm_login_time = strtotime("now");
         return DBQuery("update board_member set bm_login_time = '{$bm_login_time}' where bm_id = '{$id}'");
+    }
+
+    function randomString($string_length) {
+        $characters = "0123456789";
+        $characters .= "abcdefghijklmnopqrstuvwxyz";
+        $characters .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $characters .= "_";
+
+        $resultString = "";
+
+        $loop_length = $string_length;
+        while($loop_length--) {
+            $resultString .= $characters[mt_rand(0, strlen($characters) - 1)];
+        }
+
+        return $resultString;
     }
 ?>

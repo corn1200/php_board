@@ -1,5 +1,5 @@
 <?php
-    include_once '../db.php';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/db.php';
 
     function showComment($postIdx, $startLimit, $limit) {
         $queryResult = DBQuery("select * from board_comment where post_idx='{$postIdx}' order by bc_comment_time desc limit $startLimit,$limit");

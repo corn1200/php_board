@@ -1,5 +1,5 @@
 <?php
-    include './member_check.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/controller/member_check.php';
     
     $bm_id = strip_tags($_POST['id'], '<a>');
     $bm_password = hash("sha256", $_POST['password']);

@@ -1,5 +1,5 @@
 <?php
-    include_once '../db.php';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/db.php';
 
     function getPost($category, $search) {
         if(isset($category) && isset($search)) {

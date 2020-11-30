@@ -1,5 +1,5 @@
 <?php
-    include './member_check.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/controller/member_check.php';
 
     $postIdData = $_POST['userid'];
 

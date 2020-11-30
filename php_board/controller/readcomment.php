@@ -1,6 +1,6 @@
 <?php
-include '../model/comment.php';
-include '../controller/member_check.php';
+include $_SERVER['DOCUMENT_ROOT'].'/model/comment.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/controller/member_check.php';
 
 function readCommentList($postIdx, $startLimit, $limit)
 {

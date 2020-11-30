@@ -1,7 +1,13 @@
 <?php
-    session_start();
-    
-    include './member_check.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/controller/sessionHead.php';
+
+    $loginData['id'] = $_SESSION['id'];
+    $loginData['pw'] = $_SESSION['password'];
+    $cookieData['id'] = $_COOKIE['cookieID'];
+    $cookieData['pw'] = $_COOKIE['cookiePW'];
+    if(checkAvailableAccess($loginData, $cookieData) == false) {
+        echo alertMesseage('You are not Logged in', '/view/loginpage.php');
+    }
     
     $bp_title = strip_tags($_POST['title'], '<a>');
     $bp_contents = strip_tags($_POST['content'], '<a>');
